@@ -1,6 +1,7 @@
 package esempi;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class Main {
 
@@ -15,6 +16,16 @@ public class Main {
         System.out.println(p3);
         System.out.println(p1 == p3);
         System.out.println(p1.equals(p2));
+
+        p1.meseMorte = Mese.DICEMBRE;
+        System.out.println(p1.meseMorte.getNumMese());
+        System.out.println("Quando so morto? " + p1.meseMorte.getStagione());
+        System.out.println(Arrays.toString(Mese.values()));
+        Mese enero = Mese.valueOf("GENNAIO");
+        System.out.println(enero);
+
+        Object[] oggetti = { p1, "ciao", 3};
+        System.out.println(Arrays.toString(oggetti));
     }
 
 }

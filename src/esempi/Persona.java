@@ -9,6 +9,7 @@ public class Persona {
     public String nome;
     public String cognome;
     public LocalDate dataNascita;
+    public Mese meseMorte;
     public String luogoNascita;
     public String codiceFiscale;
 
@@ -38,6 +39,7 @@ public class Persona {
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", dataNascita=" + dataNascita +
+                ", meseMorte=" + meseMorte +
                 ", luogoNascita='" + luogoNascita + '\'' +
                 ", codiceFiscale='" + codiceFiscale + '\'' +
                 '}';
