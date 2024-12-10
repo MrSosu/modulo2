@@ -1,5 +1,7 @@
 package esempi;
 
+import esempi.ereditarieta.Persona;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 

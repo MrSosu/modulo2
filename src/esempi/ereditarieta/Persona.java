@@ -1,4 +1,6 @@
-package esempi;
+package esempi.ereditarieta;
+
+import esempi.Mese;
 
 import java.time.LocalDate;
 
@@ -15,9 +17,6 @@ public class Persona {
 
     // se non definisco alcun costruttore viene aggiunto da Java il costruttore di default
 
-    public Persona() {
-        this.id = ++idCounter;
-    }
 
     public Persona(String nome, String cognome) {
         this.id = ++idCounter;
@@ -26,10 +25,68 @@ public class Persona {
     }
 
     public Persona(String nome, String cognome, LocalDate dataNascita) {
-        this.id = ++idCounter;
-        this.nome = nome;
-        this.cognome = cognome;
+        this(nome, cognome);
         this.dataNascita = dataNascita;
+    }
+
+    public Persona() {
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    public LocalDate getDataNascita() {
+        return dataNascita;
+    }
+
+    public void setDataNascita(LocalDate dataNascita) {
+        this.dataNascita = dataNascita;
+    }
+
+    public Mese getMeseMorte() {
+        return meseMorte;
+    }
+
+    public void setMeseMorte(Mese meseMorte) {
+        this.meseMorte = meseMorte;
+    }
+
+    public String getLuogoNascita() {
+        return luogoNascita;
+    }
+
+    public void setLuogoNascita(String luogoNascita) {
+        this.luogoNascita = luogoNascita;
+    }
+
+    public String getCodiceFiscale() {
+        return codiceFiscale;
+    }
+
+    public void setCodiceFiscale(String codiceFiscale) {
+        this.codiceFiscale = codiceFiscale;
     }
 
     @Override
