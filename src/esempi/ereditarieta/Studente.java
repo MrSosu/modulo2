@@ -2,9 +2,9 @@ package esempi.ereditarieta;
 
 import java.time.LocalDate;
 
-public class Studente extends Persona {
+public class Studente extends Persona implements Comparable<Studente> {
 
-    private int matricola;
+    private Integer matricola;
 
     public Studente(String nome, String cognome, int matricola) {
         super(nome, cognome);
@@ -40,5 +40,29 @@ public class Studente extends Persona {
                 ", luogoNascita='" + luogoNascita + '\'' +
                 ", codiceFiscale='" + codiceFiscale + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Studente studente = (Studente) obj;
+        if (this.id.hashCode() == studente.id.hashCode()
+                && this.matricola.hashCode() == studente.matricola.hashCode()
+                && this.codiceFiscale.hashCode() == studente.codiceFiscale.hashCode()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int compareTo(Studente studente) {
+        /* il compareTo ritorna:
+        - Un numero NEGATIVO se l'oggetto corrente è più "piccolo"
+        - 0 se sono uguali nell'ordinamento
+        - Un numero POSITIVO se l'oggetto corrente è più "grande"
+         */
+        return this.matricola - studente.matricola;
     }
 }
