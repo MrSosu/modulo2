@@ -16,6 +16,8 @@ public class Studente extends Persona implements Comparable<Studente> {
         this.matricola = matricola;
     }
 
+    public Studente() {}
+
     public void prenotaEsame() {
         System.out.println("ESAME PRENOTATO");
     }

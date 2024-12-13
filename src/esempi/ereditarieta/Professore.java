@@ -2,7 +2,7 @@ package esempi.ereditarieta;
 
 import java.time.LocalDate;
 
-public class Professore extends Persona {
+public class Professore extends Persona implements Comparable<Professore> {
 
     private int anniServizio;
     private String corsoInsegnato;
@@ -23,6 +23,8 @@ public class Professore extends Persona {
         this.corsoInsegnato = corsoInsegnato;
     }
 
+    public Professore() {}
+
     public void inserisciVoto() {
         System.out.println("STECCATO");
     }
@@ -41,5 +43,11 @@ public class Professore extends Persona {
 
     public void setCorsoInsegnato(String corsoInsegnato) {
         this.corsoInsegnato = corsoInsegnato;
+    }
+
+
+    @Override
+    public int compareTo(Professore o) {
+        return 0;
     }
 }
