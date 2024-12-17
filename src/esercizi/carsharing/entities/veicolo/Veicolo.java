@@ -1,5 +1,7 @@
 package esercizi.carsharing.entities.veicolo;
 
+import java.time.LocalDateTime;
+
 public abstract class Veicolo implements Casco {
 
     // attributi
@@ -35,4 +37,9 @@ public abstract class Veicolo implements Casco {
     public void setCoordinata(Coordinata coordinata) {
         this.coordinata = coordinata;
     }
+
+    public Boolean isDisponibile(LocalDateTime time) {
+        return false;
+    }
+
 }

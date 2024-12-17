@@ -13,6 +13,7 @@ public class Utente {
     private String codiceFiscale;
     private Boolean hasCasco;
     private Patente patente;
+    private Double credito;
 
     // costruttori
     public Utente(String nome, String cognome, LocalDate dataNascita, String codiceFiscale, Boolean hasCasco) {
@@ -22,12 +23,17 @@ public class Utente {
         this.dataNascita = dataNascita;
         this.codiceFiscale = codiceFiscale;
         this.hasCasco = hasCasco;
+        this.credito = 0d;
     }
 
     public Utente(String nome, LocalDate dataNascita, String cognome, String codiceFiscale, Patente patente, Boolean hasCasco) {
         this(nome, cognome, dataNascita, codiceFiscale, hasCasco);
         this.patente = patente;
+        this.credito = 0d;
+    }
 
+    public Utente() {
+        this.id = ++idTot;
     }
 
     // getter e setter
@@ -81,4 +87,33 @@ public class Utente {
     public void setHasCasco(Boolean hasCasco) {
         this.hasCasco = hasCasco;
     }
+    public Double getCredito() {
+        return credito;
+    }
+    public void setCredito(Double credito) {
+        this.credito = credito;
+    }
+
+    // metodi
+    public void addCredito(Double credito) {
+        if (credito > 0) {
+            this.credito += credito;
+        }
+        else System.out.println("Il credito da aggiungere non può essere <= 0");
+    }
+
+    public Double subCredito(Double credito) {
+        if (credito > this.credito) {
+            Double result = credito - this.credito;
+            this.credito = 0d;
+            return result;
+        }
+        else {
+            this.credito -= credito;
+            return 0d;
+        }
+    }
+
+
+
 }
