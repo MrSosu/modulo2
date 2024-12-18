@@ -2,6 +2,7 @@ package esercizi.carsharing.entities.noleggio;
 
 import esercizi.carsharing.entities.utente.Utente;
 import esercizi.carsharing.entities.veicolo.Veicolo;
+import esercizi.carsharing.validators.Validator;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,8 @@ public class Noleggio {
 
     // costruttori
     public Noleggio(Veicolo veicolo, Utente utente) {
+        Validator.requireNotNull(veicolo);
+        Validator.requireNotNull(utente);
         this.id = ++idTot;
         this.veicolo = veicolo;
         this.utente = utente;
@@ -24,6 +27,9 @@ public class Noleggio {
     }
 
     public Noleggio(Veicolo veicolo, Utente utente, LocalDateTime start) {
+        Validator.requireNotNull(veicolo);
+        Validator.requireNotNull(utente);
+        Validator.requireDateTimeAfter(start, LocalDateTime.now());
         this.id = ++idTot;
         this.veicolo = veicolo;
         this.utente = utente;
@@ -60,6 +66,10 @@ public class Noleggio {
 
     public void setEnd(LocalDateTime end) {
         this.end = end;
+    }
+
+    public Boolean isNoleggioAttivo() {
+        return this.end == null;
     }
 
 }
