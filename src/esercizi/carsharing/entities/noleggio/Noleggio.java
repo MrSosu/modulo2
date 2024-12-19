@@ -72,4 +72,14 @@ public class Noleggio {
         return this.start.isBefore(time) && this.end == null;
     }
 
+    @Override
+    public String toString() {
+        return "Noleggio{" +
+                "id=" + id +
+                ", veicolo=" + veicolo +
+                ", utente=" + utente +
+                ", start=" + start +
+                ", end=" + end +
+                '}';
+    }
 }

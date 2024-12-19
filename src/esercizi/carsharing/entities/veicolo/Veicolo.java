@@ -1,7 +1,6 @@
 package esercizi.carsharing.entities.veicolo;
 
 import esercizi.carsharing.admin.Admin;
-import esercizi.carsharing.database.Database;
 import esercizi.carsharing.entities.noleggio.Noleggio;
 import esercizi.carsharing.validators.Validator;
 

@@ -10,12 +10,19 @@ import java.util.List;
 
 public class Database {
 
-    private static HashMap<Integer, Utente> utenti;
-    private static HashMap<Integer, Veicolo> veicoli;
-    private static HashMap<Integer, Noleggio> noleggi;
+    private static HashMap<Integer, Utente> utenti = new HashMap<>();
+    private static HashMap<Integer, Veicolo> veicoli = new HashMap<>();
+    private static HashMap<Integer, Noleggio> noleggi = new HashMap<>();
 
     public static void addUtente(Utente utente) {
         utenti.put(utente.getId(), utente);
+    }
+
+    public static List<Utente> getAllUtenti() {
+        return utenti
+                .values()
+                .stream()
+                .toList();
     }
 
     public static void addVeicolo(Veicolo veicolo) {

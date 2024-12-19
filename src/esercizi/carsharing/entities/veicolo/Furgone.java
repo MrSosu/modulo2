@@ -4,8 +4,8 @@ import esercizi.carsharing.entities.utente.TipoPatente;
 
 public class Furgone extends VeicoloMotore {
 
-    public Furgone(Double prezzo, TipoPatente tipoPatente) {
-        super(prezzo, tipoPatente);
+    public Furgone(Double prezzo, TipoPatente tipoPatente, String targa) {
+        super(prezzo, tipoPatente, targa);
     }
 
     @Override

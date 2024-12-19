@@ -29,6 +29,10 @@ public class Admin {
         return utente;
     }
 
+    public static List<Utente> getAllUtenti() {
+        return Database.getAllUtenti();
+    }
+
     public static Veicolo insertVeicolo(Veicolo veicolo) {
         Database.addVeicolo(veicolo);
         return veicolo;
