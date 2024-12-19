@@ -1,13 +1,18 @@
 package esercizi.carsharing.entities.utente;
 
 import esercizi.carsharing.admin.Admin;
+import esercizi.carsharing.database.Database;
 import esercizi.carsharing.entities.noleggio.Noleggio;
 import esercizi.carsharing.entities.veicolo.Veicolo;
+import esercizi.carsharing.exceptions.VeicoloNotAvailableException;
 import esercizi.carsharing.exceptions.VeicoloNotFoundException;
 import esercizi.carsharing.validators.Validator;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utente {
 
@@ -27,6 +32,7 @@ public class Utente {
         Validator.requireNotBlank(nome);
         Validator.requireNotBlank(cognome);
         Validator.requireDateBefore(dataNascita, LocalDate.now());
+        Validator.matchingPattern(codiceFiscale, "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$\n");
         this.id = ++idTot;
         this.nome = nome;
         this.cognome = cognome;
@@ -124,15 +130,36 @@ public class Utente {
         }
     }
 
-    public Noleggio attivaNoleggio(Integer id_veicolo) throws VeicoloNotFoundException {
-        // prendere (se esiste) il veicolo con id id_veicolo
-        Veicolo veicolo = Admin.getVeicoloById(id_veicolo);
-        if (veicolo == null) throw new VeicoloNotFoundException("Il veicolo con id " + id_veicolo + " non esiste!");
-        return null;
+    public Noleggio attivaNoleggio(Integer id_veicolo) throws VeicoloNotFoundException, VeicoloNotAvailableException {
+        return attivaNoleggio(id_veicolo, LocalDateTime.now());
     }
 
-    public Noleggio attivaNoleggio(Integer id_veicolo, LocalDateTime start) {
-        return null;
+    public Noleggio attivaNoleggio(Integer id_veicolo, LocalDateTime start) throws VeicoloNotFoundException, VeicoloNotAvailableException {
+        Veicolo veicolo = Admin.getVeicoloById(id_veicolo);
+        if (veicolo == null) throw new VeicoloNotFoundException("Il veicolo con id " + id_veicolo + " non esiste!");
+        if (!veicolo.isDisponibile(start)) {
+            throw new VeicoloNotAvailableException("Veicolo con id " + id_veicolo + " non disponibile!");
+        }
+        Noleggio myNoleggio = new Noleggio(veicolo, this);
+        Admin.insertNoleggio(myNoleggio);
+        return myNoleggio;
+    }
+
+    public Double terminaNoleggio(Noleggio noleggio) {
+        noleggio.setEnd(LocalDateTime.now());
+        Long minutes = Duration.between(noleggio.getStart(), noleggio.getEnd()).toMinutes();
+        return minutes * noleggio.getVeicolo().getPrezzo();
+    }
+
+    public List<Veicolo> getVeicoliDisponibili(LocalDateTime start) {
+        List<Veicolo> veicoliDisponibili = new ArrayList<>();
+        List<Veicolo> allVeicoli = Admin.getAllVeicoli();
+        for (Veicolo v : allVeicoli) {
+            if (v.isDisponibile(start)) {
+                veicoliDisponibili.add(v);
+            }
+        }
+        return veicoliDisponibili;
     }
 
 

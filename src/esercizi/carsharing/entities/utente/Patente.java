@@ -1,5 +1,7 @@
 package esercizi.carsharing.entities.utente;
 
+import esercizi.carsharing.validators.Validator;
+
 import java.time.LocalDate;
 
 public class Patente {
@@ -14,6 +16,10 @@ public class Patente {
 
     // costruttori
     public Patente(String numeroPatente, LocalDate scadenza, TipoPatente tipoPatente, Utente utente) {
+        Validator.matchingPattern(numeroPatente, "^[A-Z]{2}\\d{7}[A-Z]$\n");
+        Validator.requireDateAfter(scadenza, LocalDate.now());
+        Validator.requireNotNull(tipoPatente);
+        Validator.requireNotNull(utente);
         this.id = ++idTot;
         this.numeroPatente = numeroPatente;
         this.scadenza = scadenza;

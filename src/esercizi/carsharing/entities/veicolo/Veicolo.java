@@ -1,6 +1,12 @@
 package esercizi.carsharing.entities.veicolo;
 
+import esercizi.carsharing.admin.Admin;
+import esercizi.carsharing.database.Database;
+import esercizi.carsharing.entities.noleggio.Noleggio;
+import esercizi.carsharing.validators.Validator;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public abstract class Veicolo implements Casco {
 
@@ -12,6 +18,7 @@ public abstract class Veicolo implements Casco {
 
     // costruttore
     public Veicolo(Double prezzo) {
+        Validator.requireGreaterThen(prezzo, 0d);
         this.id = ++idTot;
         this.prezzo = prezzo;
         this.coordinata = new Coordinata(0d,0d); // er garage
@@ -39,7 +46,13 @@ public abstract class Veicolo implements Casco {
     }
 
     public Boolean isDisponibile(LocalDateTime time) {
-        return false;
+        List<Noleggio> myNoleggi = Admin.getNoleggiByVeicoloId(this.id);
+        for (Noleggio n : myNoleggi) {
+            if (n.isNoleggioAttivo(time)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

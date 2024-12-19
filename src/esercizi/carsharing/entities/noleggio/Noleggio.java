@@ -68,8 +68,8 @@ public class Noleggio {
         this.end = end;
     }
 
-    public Boolean isNoleggioAttivo() {
-        return this.end == null;
+    public Boolean isNoleggioAttivo(LocalDateTime time) {
+        return this.start.isBefore(time) && this.end == null;
     }
 
 }

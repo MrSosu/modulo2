@@ -1,6 +1,7 @@
 package esercizi.carsharing.entities.veicolo;
 
 import esercizi.carsharing.entities.utente.TipoPatente;
+import esercizi.carsharing.validators.Validator;
 
 public abstract class VeicoloMotore extends Veicolo {
 
@@ -10,10 +11,13 @@ public abstract class VeicoloMotore extends Veicolo {
     protected Double livelloCarburante; // valore tra 0 ed 1 che rappresenta la percentuale di serbatoio piena
 
     // costruttore
-    public VeicoloMotore(Double prezzo, TipoPatente tipoPatente) {
+    public VeicoloMotore(Double prezzo, TipoPatente tipoPatente, String targa) {
         super(prezzo);
+        Validator.matchingPattern(targa, "^[A-Z]{2}\\d{3}[A-Z]{2}$\n");
+        Validator.requireNotNull(tipoPatente);
         this.tipoPatente = tipoPatente;
         this.livelloCarburante = 1d;
+        this.targa = targa;
     }
 
     // getter e setter
